@@ -1,6 +1,6 @@
-import Comment from "../models/comment";
-import Product from "../models/product";
-import Video from "../models/video";
+import Comment from "../models/entity/comment";
+import Product from "../models/entity/product";
+import Video from "../models/entity/video";
 import productSchema from "../schemas/productSchema";
 import videoSchema from "../schemas/videoSchema";
 

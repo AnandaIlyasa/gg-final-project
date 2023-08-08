@@ -1,15 +1,19 @@
-import Video from "../models/video";
-import VideoRepository from "../repositories/videoRepository";
+import Result from "../models/result";
+import Video from "../models/entity/video";
+import videoSchema from "../schemas/videoSchema";
 
 export default class VideoService {
 
-    static async readOneById(id: string): Promise<Video> {
-        const foundVideo = await VideoRepository.readById(id);
-        return foundVideo;
+    async readOneVideoById(id: string): Promise<Result<Video | null>> {
+        const foundVideo: Video | null = await videoSchema.findById({_id: id});
+        if(foundVideo === null) {
+            throw new Error(`readOneVideoById video not found`);
+        }
+        return new Result<Video>(200, `readOneVideoById succeed`, foundVideo);
     }
     
-    static async readAll(): Promise<Video[]> {
-        const allVideos = await VideoRepository.readAll();
-        return allVideos;
+    async readAllVideos(): Promise<Result<Video[]>> {
+        const allVideos = await videoSchema.find();
+        return new Result<Video[]>(200, `readAllVideos succeed`, allVideos);
     }
 }

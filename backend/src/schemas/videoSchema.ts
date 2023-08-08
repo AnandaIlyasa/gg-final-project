@@ -1,6 +1,6 @@
 import { model, Schema } from "mongoose";
-import Comment from "../models/comment";
-import Video from "../models/video";
+import Comment from "../models/entity/comment";
+import Video from "../models/entity/video";
 
 const commentSchema = new Schema<Comment>({
     username: {

@@ -1,36 +1,28 @@
 import { Request, Response } from "express";
 import VideoService from "../services/videoService";
 export default class VideoController {
+    videoService: VideoService;
 
-    static async getAllVideos(_req: Request, res: Response) {
+    constructor(videoService: VideoService) {
+        this.videoService = videoService;
+    }
+
+    getAllVideos = async (_req: Request, res: Response) => {
         try {
-            const allVideos = await VideoService.readAll();
-            const response = allVideos.map((video) => {
-                return {
-                    videoId: video._id,
-                    thumbnailUrl: video.thumbnailUrl
-                }
-            })
-            res.status(200).json({
-                videos: response
-            });
+            const result = await this.videoService.readAllVideos();
+            res.status(result.status).json(result);
         } catch (error) {
-            res.status(500).send(`can not get all videos: ${error}`);
+            res.status(500).send(error);
         }
     }
 
-    static async getVideoById(req: Request, res: Response) {
+    getVideoById = async (req: Request, res: Response) => {
         const id = req.params.id;
         try {
-            const foundVideo = await VideoService.readOneById(id);
-            const response = {
-                videoId: foundVideo._id,
-                thumbnailUrl: foundVideo.thumbnailUrl,
-                embedUrl: foundVideo.embedUrl
-            }
-            res.status(200).json(response);
+            const result = await this.videoService.readOneVideoById(id);
+            res.status(result.status).json(result);
         } catch (error) {
-            res.status(400).send(`can not get video with id ${id}: ${error}`);
+            res.status(500).send(error);
         }
     }
 }

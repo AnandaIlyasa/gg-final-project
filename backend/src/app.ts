@@ -15,15 +15,11 @@ const main = async (): Promise<void> => {
     }
     await mongoose.connect(process.env.DB_CONNECTION_URI);
     console.log("connected to the database")
-  } catch (error) {
-    console.log('Error connecting to one datastore: ', error)
-  }
-
-  try {
+    await mongoose.connection.dropDatabase();
     await migrate();
     console.log("data migration success");
   } catch (error) {
-    console.log(`error migrating data: ${error}`);
+    console.log(`database error: ${error}`);
   }
 
   const rootRoute = new RootRoute(app, Router());

@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import Product from "../models/product";
+import Product from "../models/entity/product";
 
 const productSchema = new Schema({
     productLink: {
