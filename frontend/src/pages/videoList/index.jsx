@@ -1,23 +1,26 @@
-import { useState, useEffect } from "react";
+import useFetch from "../../hooks/useFetch";
+import "./style.css";
+import { Grid, GridItem } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
+import Header from "../components/header";
 
 export default function VideoList() {
-    const [videoList, setVideoList] = useState([]);
-
-    useEffect(() => {
-        fetch("http://localhost:3070/api/videos")
-            .then((response) => {
-                return response.json();
-            }).then((data) => {
-                console.log("data: ", data);
-                setVideoList(data);
-            }).catch((error) => {
-                console.log("error fetching profile: ", error);
-            })
-    }, []);
+    const [videoList, videoListError, videoListLoading] = useFetch("http://localhost:3070/api/videos", { method: "GET" });
 
     return (
-        <div>
-            main page
+        <div className="container">
+            <Header />
+            <Grid templateColumns='repeat(6, 1fr)' gap={3} padding='1rem 1rem'>
+                {videoList?.data?.map(video => (
+                    <li key={video._id}>
+                        <GridItem w='100%' h='26rem'>
+                            <Link to={`/channel/${video._id}`}>
+                                <img className="thumbnail" src={video.thumbnailUrl} alt="" />
+                            </Link>
+                        </GridItem>
+                    </li>
+                ))}
+            </Grid>
         </div>
     )
 }
