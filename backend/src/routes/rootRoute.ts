@@ -22,6 +22,7 @@ export default class RootRoute {
         const productController: ProductController = new ProductController(new ProductService());
 
         router.get("/videos", videoController.getAllVideos);
+        router.get("/videos/:videoId", videoController.getVideoById);
         router.get("/videos/:videoId/comments", commentController.getAllCommentsByVideoId);
         router.post("/videos/:videoId/comments", commentController.postNewComment);
         router.get("/products/videos/:videoId", productController.getAllProductsByVideoId);

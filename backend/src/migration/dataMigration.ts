@@ -46,5 +46,10 @@ async function insertVideos(productIds: any) {
         new Video(embedUrl, thumbnailUrls[2], [productIds[2]._id, productIds[3]._id], [comments[0], comments[1]]),
         new Video(embedUrl, thumbnailUrls[3], [productIds[3]._id, productIds[4]._id], [comments[0], comments[1]]),
         new Video(embedUrl, thumbnailUrls[4], [productIds[4]._id, productIds[0]._id], [comments[0], comments[1]]),
+        new Video(embedUrl, thumbnailUrls[0], [productIds[0]._id, productIds[1]._id], [comments[0], comments[1]]),
+        new Video(embedUrl, thumbnailUrls[1], [productIds[1]._id, productIds[2]._id], [comments[0], comments[1]]),
+        new Video(embedUrl, thumbnailUrls[2], [productIds[2]._id, productIds[3]._id], [comments[0], comments[1]]),
+        new Video(embedUrl, thumbnailUrls[3], [productIds[3]._id, productIds[4]._id], [comments[0], comments[1]]),
+        new Video(embedUrl, thumbnailUrls[4], [productIds[4]._id, productIds[0]._id], [comments[0], comments[1]]),
     ])
 }

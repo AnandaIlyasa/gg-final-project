@@ -17,7 +17,7 @@ export default class VideoController {
     }
 
     getVideoById = async (req: Request, res: Response) => {
-        const id = req.params.id;
+        const id = req.params.videoId;
         try {
             const result = await this.videoService.readOneVideoById(id);
             res.status(result.status).json(result);
