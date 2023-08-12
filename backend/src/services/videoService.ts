@@ -1,11 +1,11 @@
 import Result from "../models/result";
 import Video from "../models/entity/video";
-import videoSchema from "../schemas/videoSchema";
+import { VideoCommentSchema } from "../schemas/videoSchema";
 
 export default class VideoService {
 
     async readOneVideoById(id: string): Promise<Result<Video | null>> {
-        const foundVideo: Video | null = await videoSchema.findById({_id: id});
+        const foundVideo: Video | null = await VideoCommentSchema.findById({_id: id});
         if(foundVideo === null) {
             throw new Error(`readOneVideoById video not found`);
         }
@@ -13,7 +13,7 @@ export default class VideoService {
     }
     
     async readAllVideos(): Promise<Result<Video[]>> {
-        const allVideos = await videoSchema.find();
+        const allVideos = await VideoCommentSchema.find();
         return new Result<Video[]>(200, `readAllVideos succeed`, allVideos);
     }
 }

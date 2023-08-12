@@ -1,8 +1,8 @@
 import Comment from "../models/entity/comment";
 import Product from "../models/entity/product";
 import Video from "../models/entity/video";
-import productSchema from "../schemas/productSchema";
-import videoSchema from "../schemas/videoSchema";
+import ProductSchema from "../schemas/productSchema";
+import { VideoCommentSchema, CommentSchema } from "../schemas/videoSchema";
 
 export default async function migrate() {
     const productIds = await insertProducts();
@@ -17,7 +17,7 @@ async function insertProducts(): Promise<any[]> {
         "https://www.tokopedia.com/garudafood/gery-saluut-malkist-coklat",
         "https://www.tokopedia.com/mondelez/biskuat-biskuit-coklat-134-4-g-3-pcs?extParam=ivf%3Dfalse%26whid%3D13355454&src=topads",
     ]
-    const productIds = await productSchema.insertMany([
+    const productIds = await ProductSchema.insertMany([
         new Product(productLinks[0], "Shampo Clear", 90500),
         new Product(productLinks[1], "Dettol Antiseptik", 165000),
         new Product(productLinks[2], "Kacang Garuda", 36000),
@@ -37,10 +37,10 @@ async function insertVideos(productIds: any) {
         "https://i.ytimg.com/vi/D63yDoKM1FE/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCFeCzj5HSvbSuUX0kjj_QBuOMvPg",
     ]
     const comments = [
-        new Comment("User 1", "Comment 1", new Date()),
-        new Comment("User 2", "Comment 2", new Date()),
+        new CommentSchema(new Comment("User 1", "Comment 1", new Date())),
+        new CommentSchema(new Comment("User 2", "Comment 2", new Date())),
     ]
-    await videoSchema.insertMany([
+    await VideoCommentSchema.insertMany([
         new Video(embedUrl, thumbnailUrls[0], [productIds[0]._id, productIds[1]._id], [comments[0], comments[1]]),
         new Video(embedUrl, thumbnailUrls[1], [productIds[1]._id, productIds[2]._id], [comments[0], comments[1]]),
         new Video(embedUrl, thumbnailUrls[2], [productIds[2]._id, productIds[3]._id], [comments[0], comments[1]]),

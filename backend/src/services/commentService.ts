@@ -1,10 +1,10 @@
 import Comment from "../models/entity/comment";
 import Result from "../models/result";
-import videoSchema from "../schemas/videoSchema";
+import { VideoCommentSchema } from "../schemas/videoSchema";
 
 export default class CommentService {
     async readAllCommentsByVideoId(videoId: string): Promise<Result<Comment[]>> {
-        const foundVideo = await videoSchema.findById({_id: videoId});
+        const foundVideo = await VideoCommentSchema.findById({_id: videoId});
         if(foundVideo === null) {
             throw new Error(`readAllCommentsByVideoId video not found`);
         }
@@ -13,7 +13,7 @@ export default class CommentService {
     }
     
     async postNewComment(videoId: string, payload: {username: string, comment: string}): Promise<Result<Comment | null>> {
-        const foundVideo = await videoSchema.findById({_id: videoId});
+        const foundVideo = await VideoCommentSchema.findById({_id: videoId});
         if(foundVideo === null) {
             throw new Error(`postNewComment video not found`);
         }

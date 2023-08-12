@@ -37,4 +37,5 @@ const videoCommentSchema = new Schema<Video>({
     versionKey: false
 });
 
-export default model<Video>('videos', videoCommentSchema);
+export const CommentSchema = model<Comment>('comments', commentSchema);
+export const VideoCommentSchema = model<Video>('videos', videoCommentSchema);

@@ -1,12 +1,12 @@
 import Product from "../models/entity/product";
 import Result from "../models/result";
 import productSchema from "../schemas/productSchema";
-import videoSchema from "../schemas/videoSchema";
+import { VideoCommentSchema } from "../schemas/videoSchema";
 
 export default class ProductService {
 
     readAllProductsByVideoId = async (videoId: string): Promise<Result<Product[]>> => {
-        const foundVideo = await videoSchema.findById(videoId);
+        const foundVideo = await VideoCommentSchema.findById(videoId);
         if(foundVideo === null) {
             throw new Error(`readAllProductsByVideoId video not found`);
         }
