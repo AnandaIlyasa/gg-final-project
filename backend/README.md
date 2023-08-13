@@ -1,3 +1,21 @@
+# How to run
+
+1. Clone this repository and go to the `backend` folder
+
+2. Make sure your MongoDB string connection is correct
+
+3. Install all dependencies
+
+   ```
+   npm install
+   ```
+
+4. Run the aplication
+
+   ```
+   npm run dev
+   ```
+
 # Database Structure
 
 This project uses MongoDB and below is the database schema I used in this project.
@@ -9,16 +27,18 @@ This project uses MongoDB and below is the database schema I used in this projec
     	productLink: string
     	title: string
     	price: integer
+    	imgUrl: string
     }
 
 ### videos
 
     {
         _id: ObjectId
-        embedUrl: string, required
-    	thumbnailUrl: string, required
+        embedUrl: string
+    	thumbnailUrl: string
     	productIds: string[], ref -> products
-    	**comments**: Object[] {
+    	comments: Object[] {
+    		_id: ObjectId
     		username: string
     		comment: string
     		timestamp: Date
@@ -37,8 +57,47 @@ This project uses MongoDB and below is the database schema I used in this projec
 
 ```
 {
-  videoId: ObjectId
-  thumbnailUrl: string
+	_id: string
+	embedUrl: string
+	thumbnailUrl: string
+	productIds: [string]
+	comments: [
+		<comment_object>,
+		<comment_object>,
+		<comment_object>
+	]
+}
+```
+
+**GET /api/videos/:videoId**
+
+---
+
+Returns all videos.
+
+- **URL Params**
+
+  _Required:_ `videoId=[string]`
+
+- **Data Params**
+
+  None
+
+- **Headers**
+
+  Content-Type: application/json
+
+- **Success Response:**
+
+- **Code:** 200
+
+  **Content:**
+
+```
+{
+	status: number
+	message: string
+	data: <video_object>
 }
 ```
 
@@ -66,10 +125,12 @@ Returns all videos.
 
 ```
 {
-	videos: [
-		{<video_object>},
-		{<video_object>},
-		{<video_object>}
+	status: number
+	message: string
+	data: [
+		<video_object>,
+		<video_object>,
+		<video_object>
 	]
 }
 ```
@@ -84,6 +145,7 @@ Returns all videos.
 	productLink: string
 	title: string
 	price: integer
+	imgUrl: string
 }
 ```
 
@@ -113,24 +175,13 @@ Returns products on the specified video.
 
 ```
 {
-	products: [
+	status: number
+	message: string
+	data: [
 		<prduct_object>,
 		<prduct_object>,
 		<prduct_object>
 	]
-}
-```
-
-- **Error Response:**
-
-- **Code:** 400
-
-  **Content:**
-
-```
-{
-	status: "fail",
-	message: "can not get all products in video with id <videoId>"
 }
 ```
 
@@ -140,6 +191,7 @@ Returns products on the specified video.
 
 ```
 {
+	_id: string
 	username: string
 	comment: string
 	timestamp: Date
@@ -172,24 +224,13 @@ Returns comments on specified video.
 
 ```
 {
-	comments: [
+	status: number
+	message: string
+	data: [
 		<comment_object>,
 		<comment_object>,
 		<comment_object>
 	]
-}
-```
-
-- **Error Response:**
-
-- **Code:** 400
-
-**Content:**
-
-```
-{
-	status: "fail",
-	message: "an not get all comments in video with id <videoId>"
 }
 ```
 
@@ -224,75 +265,8 @@ Submit a comment on a video
 
 ```
 {
-	status: "success"
-	comment: <comment_object>
+	status: number
+	message: string
+	data: <comment_object>
 }
-```
-
-- **Error Response:**
-
-- **Code:** 400
-
-  **Content:**
-
-```
-{
-	status: "fail",
-	message: "failed posting a new comment in video with id <videoId>"
-}
-```
-
-OR
-
-- **Code:** 400
-
-  **Content:**
-
-```
-{
-	status: "fail",
-	message: "comment can not be empty"
-}
-
-```
-
-OR
-
-- **Code:** 400
-
-  **Content:**
-
-```
-{
-	status: "fail",
-	message: "username can not be empty"
-}
-```
-
-# How to run
-
-1. Extract the .zip file of this project or clone the repository and go to the `midterm` folder
-
-```
-	https://github.com/AnandaIlyasa/gigih
-```
-
-2. Make sure your MongoDB server is up and running at port `27017`
-
-3. Install all dependencies
-
-```
-	npm install
-```
-
-4. Run the aplication
-
-```
-	npm run start
-```
-
-or start in development mode
-
-```
-	npm run dev
 ```
