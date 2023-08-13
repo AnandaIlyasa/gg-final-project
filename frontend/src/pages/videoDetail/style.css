@@ -1,3 +1,88 @@
-h2 span {
+#product-video {
+    width: 70vw;
+}
+
+#products {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    width: 93%;
+    overflow: auto;
+}
+
+#products::-webkit-scrollbar {
+    height: 0.5rem;
+}
+
+#products::-webkit-scrollbar-thumb {
+    margin-top: 1rem;
+    background: #555; 
+    border-radius: 1rem;
+}
+
+#products li {
+    display: flex;
+    justify-content: center;
+    min-width: 100px;
+    max-width: 100px;
     margin-right: 1rem;
+}
+
+#products li:hover {
+    cursor: pointer;
+    filter: brightness(50%);
+}
+
+.product-image {
+    object-fit: cover;
+    height: 60%;
+    width: 100%;
+    background-color: #555;
+    border-radius: 0.5rem;
+}
+
+iframe {
+    border-radius: 0.5rem;
+}
+
+#comments {
+    height: 85vh;
+    text-align: left;
+}
+
+#comments ul {
+    overflow-y: auto;
+}
+
+#comments ul::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+#comments ul::-webkit-scrollbar-thumb {
+    background: #555; 
+    border-radius: 1rem;
+}
+
+#comments li {
+    overflow:hidden;
+    margin-top: 0.5rem;
+}
+
+#comment-form {
+    margin-top: 1rem;
+}
+
+#comment-form input {
+    color: #28282F;
+    padding: 0.3rem 0.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 1rem;
+    width: 100%;
+}
+
+#comment-form button {
+    background-color: green;
+    text-align: center;
+    padding: 0.2rem 2rem;
+    border-radius: 1rem;
 }

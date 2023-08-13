@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import useUpdateEffect from "./useUpdateEffect";
 
 const useFetch = (initialUrl, opt) => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [url] = useState(initialUrl || "");
   const [options] = useState(opt);
 
-  useEffect(() => {
+  const callback = () => {
     if (!url) return;
 
     const fetchData = async () => {
@@ -28,9 +29,11 @@ const useFetch = (initialUrl, opt) => {
     };
 
     fetchData();
-  }, [url, options]);
+  };
 
-  return [data, error, loading];
+  useUpdateEffect(callback, []);
+
+  return [data, setData, error, loading];
 };
 
 export default useFetch;

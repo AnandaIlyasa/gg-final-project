@@ -1,29 +1,9 @@
-.container {
-    width: 100vw;
-    min-height: 100vh;
-}
-
-.header {
-    padding: 1rem 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    z-index: 100;
-    position: sticky;
-    top: 0;
-    background-color: #28282F;
-}
-
-h2:hover {
-    filter: brightness(85%);
-    cursor: pointer;
-}
-
 li {
     list-style-type: none;
-    cursor: pointer;
 }
 
-li:hover {
+.video-item:hover {
+    cursor: pointer;
     filter: brightness(50%);
 }
 
@@ -32,12 +12,3 @@ li:hover {
     border-radius: 0.5rem;
     height: 100%;
 }
-
-footer {
-    background-color: #28282F;
-    position: fixed;
-    width: 100%;
-    padding: 0.5rem;
-    color: gray;
-}
-
