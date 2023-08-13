@@ -20,10 +20,9 @@ const main = async (): Promise<void> => {
       throw new Error("database URI is undefined");
     }
     await mongoose.connect(process.env.DB_CONNECTION_URI);
-    console.log("connected to the database")
-    // await mongoose.connection.dropDatabase();
-    // await migrate();
-    // console.log("data migration success");
+    console.log("connected to the database");
+    await migrate();
+    console.log("data migration success");
   } catch (error) {
     console.log(`database error: ${error}`);
   }

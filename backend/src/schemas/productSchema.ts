@@ -13,6 +13,10 @@ const productSchema = new Schema({
     price: {
         type: Schema.Types.Number,
         required: true,
+    },
+    imgUrl: {
+        type: Schema.Types.String,
+        required: true,
     }
 },
 {

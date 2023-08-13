@@ -19,10 +19,11 @@ export default class CommentService {
         }
         const newComment = new Comment(payload.username, payload.comment, new Date());
         foundVideo.comments.push(newComment);
-        const postedComment = await foundVideo.save();
-        if(postedComment === undefined) {
+        const postedCommentId = await foundVideo.save();
+        if(postedCommentId === undefined) {
             throw new Error(`postNewComment fail saving comment`);
         }
+        newComment._id = postedCommentId._id;
         return new Result<Comment>(200, `postNewComment succeed`, newComment);
     }
 }
