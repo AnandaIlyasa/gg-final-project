@@ -1,8 +1,26 @@
-# React + Vite
+# How to run
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+1. Clone this repository and go to the `frontend` folder
 
-Currently, two official plugins are available:
+2. Create .env file and add API_URL field that contains your backend address
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+3. Install all dependencies
+
+   ```
+   npm install
+   ```
+
+4. Run the aplication
+
+   ```
+   npm run dev
+   ```
+
+5. Open `localhost:5173` <br/><br/>
+
+# This app has two pages
+
+- **Main Page** which lists the selling streaming channels to choose from <br/><br/>
+  ![image](./main-page-screenshot.jpg) <br/><br/>
+- **Channel Page** that shows a selling streaming video with list of products and comments <br/><br/>
+  ![image](./channel-page-screenshot.jpg) <br/><br/>
