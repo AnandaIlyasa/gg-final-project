@@ -2,7 +2,7 @@
 
 1. Clone this repository and go to the `backend` folder
 
-2. Make sure your MongoDB string connection is correct
+2. Make sure your MongoDB server is running and the string connection is match
 
 3. Install all dependencies
 
