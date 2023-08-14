@@ -8,62 +8,40 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const commentService_1 = __importDefault(require("../services/commentService"));
 class CommentController {
-    static getAllCommentsByVideoId(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
+    constructor(commentService) {
+        this.getAllCommentsByVideoId = (req, res) => __awaiter(this, void 0, void 0, function* () {
             const videoId = req.params.videoId;
             try {
-                const foundComments = yield commentService_1.default.readAllByVideoId(videoId);
-                const response = foundComments.map((comment) => {
-                    return {
-                        username: comment.username,
-                        comment: comment.comment,
-                        timestamp: comment.timestamp
-                    };
-                });
-                res.status(200).json(response);
+                const result = yield this.commentService.readAllCommentsByVideoId(videoId);
+                res.status(result.status).json(result);
             }
             catch (error) {
-                res.status(500).send(`can not get all comments in video with id ${videoId}: ${error}`);
+                res.status(500).send(error);
             }
         });
-    }
-    static postNewComment(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
+        this.postNewComment = (req, res) => __awaiter(this, void 0, void 0, function* () {
             const { username, comment } = req.body;
-            if (!username) {
+            if (!username || !comment) {
                 res.status(400).json({
                     status: "fail",
-                    message: "username can not be empty"
+                    message: "username and comment can not be empty"
                 });
-                return;
-            }
-            if (!comment) {
-                res.status(400).json({
-                    status: "fail",
-                    message: "comment can not be empty"
-                });
-                return;
             }
             const videoId = req.params.videoId;
             try {
-                yield commentService_1.default.postNewComment(videoId, { username, comment });
-                res.status(200).json({
-                    status: "success"
-                });
+                const result = yield this.commentService.postNewComment(videoId, { username, comment });
+                res.status(result.status).json(result);
             }
             catch (error) {
                 res.status(400).json({
                     status: "fail",
-                    message: `failed posting a new comment in video with id ${videoId}: ${error}`
+                    message: error
                 });
             }
         });
+        this.commentService = commentService;
     }
 }
 exports.default = CommentController;

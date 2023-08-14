@@ -12,21 +12,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const productRepository_1 = __importDefault(require("../repositories/productRepository"));
-const videoRepository_1 = __importDefault(require("../repositories/videoRepository"));
+const result_1 = __importDefault(require("../models/result"));
+const productSchema_1 = __importDefault(require("../schemas/productSchema"));
+const videoSchema_1 = require("../schemas/videoSchema");
 class ProductService {
-    static readAllByVideoId(videoId) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const foundVideo = yield videoRepository_1.default.readById(videoId);
+    constructor() {
+        this.readAllProductsByVideoId = (videoId) => __awaiter(this, void 0, void 0, function* () {
+            const foundVideo = yield videoSchema_1.VideoCommentSchema.findById(videoId);
+            if (foundVideo === null) {
+                throw new Error(`readAllProductsByVideoId video not found`);
+            }
             const productIds = foundVideo.productIds;
-            const allProducts = yield productRepository_1.default.readAll();
-            const foundProducts = allProducts.filter((product) => {
+            const allProducts = yield productSchema_1.default.find();
+            const matchedProducts = allProducts.filter((product) => {
                 if (product._id === undefined) {
                     return false;
                 }
                 return productIds.includes(product._id);
             });
-            return foundProducts;
+            return new result_1.default(200, `readAllProductsByVideoId succeed`, matchedProducts);
         });
     }
 }

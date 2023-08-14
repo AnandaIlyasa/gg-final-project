@@ -8,45 +8,29 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const videoService_1 = __importDefault(require("../services/videoService"));
 class VideoController {
-    static getAllVideos(_req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
+    constructor(videoService) {
+        this.getAllVideos = (_req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const allVideos = yield videoService_1.default.readAll();
-                const response = allVideos.map((video) => {
-                    return {
-                        videoId: video._id,
-                        thumbnailUrl: video.thumbnailUrl
-                    };
-                });
-                res.status(200).json(response);
+                const result = yield this.videoService.readAllVideos();
+                res.status(result.status).json(result);
             }
             catch (error) {
-                res.status(500).send(`can not get all videos: ${error}`);
+                res.status(500).send(error);
             }
         });
-    }
-    static getVideoById(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const id = req.params.id;
+        this.getVideoById = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const id = req.params.videoId;
             try {
-                const foundVideo = yield videoService_1.default.readOneById(id);
-                const response = {
-                    videoId: foundVideo._id,
-                    thumbnailUrl: foundVideo.thumbnailUrl,
-                    embedUrl: foundVideo.embedUrl
-                };
-                res.status(200).json(response);
+                const result = yield this.videoService.readOneVideoById(id);
+                res.status(result.status).json(result);
             }
             catch (error) {
-                res.status(500).send(`can not get video with id ${id}: ${error}`);
+                res.status(500).send(error);
             }
         });
+        this.videoService = videoService;
     }
 }
 exports.default = VideoController;

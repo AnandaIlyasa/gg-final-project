@@ -12,24 +12,34 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const comment_1 = __importDefault(require("../models/comment"));
-const videoRepository_1 = __importDefault(require("../repositories/videoRepository"));
+const comment_1 = __importDefault(require("../models/entity/comment"));
+const result_1 = __importDefault(require("../models/result"));
+const videoSchema_1 = require("../schemas/videoSchema");
 class CommentService {
-    static readAllByVideoId(videoId) {
+    readAllCommentsByVideoId(videoId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const foundVideo = yield videoRepository_1.default.readById(videoId);
+            const foundVideo = yield videoSchema_1.VideoCommentSchema.findById({ _id: videoId });
+            if (foundVideo === null) {
+                throw new Error(`readAllCommentsByVideoId video not found`);
+            }
             const foundComments = foundVideo.comments;
-            return foundComments;
+            return new result_1.default(200, `readAllCommentsByVideoId succeed`, foundComments);
         });
     }
-    static postNewComment(videoId, payload) {
+    postNewComment(videoId, payload) {
         return __awaiter(this, void 0, void 0, function* () {
-            const foundVideo = yield videoRepository_1.default.readById(videoId);
-            if (foundVideo === undefined) {
-                throw new Error(`video with id ${videoId} is not found`);
+            const foundVideo = yield videoSchema_1.VideoCommentSchema.findById({ _id: videoId });
+            if (foundVideo === null) {
+                throw new Error(`postNewComment video not found`);
             }
             const newComment = new comment_1.default(payload.username, payload.comment, new Date());
-            yield videoRepository_1.default.addNewComment(videoId, newComment);
+            foundVideo.comments.push(newComment);
+            const postedCommentId = yield foundVideo.save();
+            if (postedCommentId === undefined) {
+                throw new Error(`postNewComment fail saving comment`);
+            }
+            newComment._id = postedCommentId._id;
+            return new result_1.default(200, `postNewComment succeed`, newComment);
         });
     }
 }

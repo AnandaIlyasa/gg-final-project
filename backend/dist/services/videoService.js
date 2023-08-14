@@ -12,18 +12,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const videoRepository_1 = __importDefault(require("../repositories/videoRepository"));
+const result_1 = __importDefault(require("../models/result"));
+const videoSchema_1 = require("../schemas/videoSchema");
 class VideoService {
-    static readOneById(id) {
+    readOneVideoById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const foundVideo = yield videoRepository_1.default.readById(id);
-            return foundVideo;
+            const foundVideo = yield videoSchema_1.VideoCommentSchema.findById({ _id: id });
+            if (foundVideo === null) {
+                throw new Error(`readOneVideoById video not found`);
+            }
+            return new result_1.default(200, `readOneVideoById succeed`, foundVideo);
         });
     }
-    static readAll() {
+    readAllVideos() {
         return __awaiter(this, void 0, void 0, function* () {
-            const allVideos = yield videoRepository_1.default.readAll();
-            return allVideos;
+            const allVideos = yield videoSchema_1.VideoCommentSchema.find();
+            return new result_1.default(200, `readAllVideos succeed`, allVideos);
         });
     }
 }
