@@ -10,9 +10,9 @@ import EmbedVideo from "./components/embedVideo";
 
 export default function VideoDetail() {
     const { videoId } = useParams();
-    const [products] = useFetch(`http://localhost:3070/api/products/videos/${videoId}`, { method: "GET" });
-    const [currentVideo] = useFetch(`http://localhost:3070/api/videos/${videoId}`, { method: "GET" });
-    const [comments, setComments] = useFetch(`http://localhost:3070/api/videos/${videoId}/comments`, { method: "GET" });
+    const [products] = useFetch(`${import.meta.env.VITE_API_URL}/products/videos/${videoId}`, { method: "GET" });
+    const [currentVideo] = useFetch(`${import.meta.env.VITE_API_URL}/videos/${videoId}`, { method: "GET" });
+    const [comments, setComments] = useFetch(`${import.meta.env.VITE_API_URL}/videos/${videoId}/comments`, { method: "GET" });
     const [form, setForm] = useState({
         username: "",
         comment: ""
@@ -22,7 +22,7 @@ export default function VideoDetail() {
         e.preventDefault();
         try {
             const res = await fetch(
-                `http://localhost:3070/api/videos/${videoId}/comments`,
+                `${import.meta.env.VITE_API_URL}/videos/${videoId}/comments`,
                 {
                     method: "POST",
                     body: JSON.stringify({...form}),

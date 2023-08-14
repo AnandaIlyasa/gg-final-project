@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Header from "../components/header";
 
 export default function VideoList() {
-    const [videoList] = useFetch("http://localhost:3070/api/videos", { method: "GET" });
+    const [videoList] = useFetch(`${import.meta.env.VITE_API_URL}/videos`, { method: "GET" });
     
     return (
         <div className="container">
