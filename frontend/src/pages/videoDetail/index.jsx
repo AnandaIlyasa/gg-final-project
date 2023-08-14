@@ -54,7 +54,7 @@ export default function VideoDetail() {
     return (
         <div className="container">
             <Header />
-            <Flex id="wrapper" flexDirection="row" justifyContent="end">
+            <Flex id="wrapper" flexDirection="row" justifyContent="start" gap={10}>
                 <Flex id="product-video" flexDirection="column" justifyContent="start" gap={5}>
                     <EmbedVideo embedUrl={currentVideo?.data?.embedUrl} />
                     <Products products={products}/>

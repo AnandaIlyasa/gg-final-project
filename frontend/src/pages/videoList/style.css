@@ -12,3 +12,15 @@ li {
     border-radius: 0.5rem;
     height: 100%;
 }
+
+@media all and (max-width: 1000px) {
+    #video-grid {
+        grid-template-columns: repeat(3, 1fr)
+    }
+}
+
+@media all and (max-width: 670px) {
+    #video-grid {
+        grid-template-columns: repeat(2, 1fr)
+    }
+}

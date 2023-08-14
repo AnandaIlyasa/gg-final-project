@@ -10,7 +10,7 @@ export default function VideoList() {
     return (
         <div className="container">
             <Header />
-            <Grid templateColumns='repeat(6, 1fr)' gap={3}>
+            <Grid id="video-grid" templateColumns='repeat(6, 1fr)' gap={3}>
                 {videoList?.data?.map(video => (
                     <li key={video._id}>
                         <GridItem w='100%' h='26rem'>

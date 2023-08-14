@@ -4,7 +4,7 @@ export default function EmbedVideo({ embedUrl }) {
     return (
         <div className="video-responsive">
             <iframe
-                width="95%"
+                width="100%"
                 height="480"
                 src={embedUrl}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
