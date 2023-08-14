@@ -1,8 +1,8 @@
 import express, { Router } from 'express';
 const cors = require('cors');
 import mongoose, { model } from 'mongoose';
-import migrate from './migration/dataMigration';
-import RootRoute from './routes/rootRoute';
+import migrate from './src/migration/dataMigration';
+import RootRoute from './src/routes/rootRoute';
 
 require('dotenv').config();
 
