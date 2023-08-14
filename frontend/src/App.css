@@ -16,8 +16,8 @@
   display: flex;
   z-index: 100;
   position: sticky;
-  top: 0;
   background-color: #28282F;
+  top: 0;
 }
 
 h2:hover {

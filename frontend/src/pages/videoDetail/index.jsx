@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import Header from "../components/header";
-import { Flex } from '@chakra-ui/react'
+import { Flex, Heading } from '@chakra-ui/react'
 import "./style.css";
 import Comments from "./components/comments";
 import { useState } from "react";
@@ -54,12 +54,13 @@ export default function VideoDetail() {
     return (
         <div className="container">
             <Header />
-            <Flex id="wrapper" flexDirection="row" justifyContent="start" gap={10}>
-                <Flex id="product-video" flexDirection="column" justifyContent="start" gap={5}>
+            <Flex id="wrapper" flexDirection="row" justifyContent="start" gap={3} height="86vh">
+                <Flex id="product-video-container" flexDirection="column" justifyContent="start" gap={3}>
                     <EmbedVideo embedUrl={currentVideo?.data?.embedUrl} />
                     <Products products={products}/>
                 </Flex>
-                <Flex id="comments" flexDirection="column" paddingInlineEnd={8}>
+                <Flex id="comments-wrapper" flexDirection="column">
+                    <Heading size="lg">Comments</Heading>
                     <Comments comments={comments}/>
                     <form id="comment-form" onSubmit={handleSubmit}>
                         <input id="username" type="text" onChange={handleInputChange} placeholder="username" name="username" value={form.username} required />

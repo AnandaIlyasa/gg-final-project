@@ -1,34 +1,35 @@
-#product-video {
-    min-width: 65vw;
+#product-video-container {
+    min-width: 60vw;
 }
 
-#products {
+#products-container {
     display: flex;
     flex-direction: row;
-    justify-content: left;
     width: 100%;
     overflow: auto;
+    background-color: #20262E;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.5rem 0 0.5rem;
 }
 
-#products::-webkit-scrollbar {
+#products-container::-webkit-scrollbar {
     height: 0.5rem;
 }
 
-#products::-webkit-scrollbar-thumb {
-    margin-top: 1rem;
+#products-container::-webkit-scrollbar-thumb {
     background: #555; 
     border-radius: 1rem;
 }
 
-#products li {
+.product-item {
     display: flex;
     justify-content: center;
-    min-width: 100px;
-    max-width: 100px;
-    margin-right: 1rem;
+    min-width: 90px;
+    max-width: 90px;
+    margin-right: 0.5rem;
 }
 
-#products li:hover {
+.product-item:hover {
     cursor: pointer;
     filter: brightness(50%);
 }
@@ -45,33 +46,31 @@ iframe {
     border-radius: 0.5rem;
 }
 
-#comments {
+#comments-wrapper {
+    background-color: #20262E;
+    border-radius: 0.5rem;
     width: 100%;
-    height: 85vh;
     text-align: left;
+    padding: 1rem;
+}
+
+#comments-container {
+    overflow-y: auto;
     margin: 1rem 0;
 }
 
-#comments ul {
-    overflow-y: auto;
-}
-
-#comments ul::-webkit-scrollbar {
+#comments-container::-webkit-scrollbar {
     width: 0.5rem;
 }
 
-#comments ul::-webkit-scrollbar-thumb {
+#comments-container::-webkit-scrollbar-thumb {
     background: #555; 
     border-radius: 1rem;
 }
 
-#comments li {
+.comment-item {
     overflow:hidden;
     margin-top: 0.5rem;
-}
-
-#comment-form {
-    margin-top: 1rem;
 }
 
 #comment-form input {

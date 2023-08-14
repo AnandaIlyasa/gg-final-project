@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 export default function Comments({ comments }) {
     return (
-        <ul>
+        <ul id="comments-container">
             {comments?.data?.map(comment => {
                 const timestamp = new Date(comment.timestamp);
                 return (
-                    <li key={comment._id}>
+                    <li className="comment-item" key={comment._id}>
                         <Flex flexDirection="row" justifyContent="space-between">
                             <Text noOfLines={1} fontWeight="bold">{comment.username}</Text>
                             <Text minWidth="fit-content" paddingInlineEnd={2} fontSize='xs' paddingBlock={1}>

@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 
 export default function Products({ products }) {
     return (
-        <ul id="products">
+        <ul id="products-container">
             {products?.data?.map(product => (
-                <li key={product._id}>
+                <li className="product-item" key={product._id}>
                     <Link target='_blank' to={product.productLink}>
                         <img className="product-image" src={product.imgUrl} alt="" />
                         <Text width="100%" noOfLines={1} textAlign="left">{product.title}</Text>

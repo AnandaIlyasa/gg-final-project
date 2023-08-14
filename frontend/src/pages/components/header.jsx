@@ -8,8 +8,8 @@ export default function Header() {
             <Link to={videoId ? "/" : "."}>
                 {
                     videoId ? 
-                    <Heading as="h2" size="md"><span className="fa fa-arrow-left"></span> Channels</Heading> : 
-                    <Heading as="h2" size="md">Tokped Play</Heading>
+                    <Heading as="h2" size="lg"><span className="fa fa-arrow-left"></span> Channels</Heading> : 
+                    <Heading as="h2" size="lg">Tokped Play</Heading>
                 }
             </Link>
         </div>
