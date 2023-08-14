@@ -10,10 +10,6 @@ const main = async (): Promise<void> => {
   const app = express();
   app.use(express.json({ type: '*/*' }));
   app.use(cors());
-  app.use((req, res, next) => {
-    console.log("ada request");
-    next();
-  })
 
   try {
     if(process.env.DB_CONNECTION_URI === undefined) {

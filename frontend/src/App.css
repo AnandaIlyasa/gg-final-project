@@ -5,12 +5,6 @@
   background-color: #28282F;
 }
 
-.container {
-  width: 100vw;
-  min-height: 100vh;
-  padding: 0 2rem;
-}
-
 .header {
   padding: 1rem 0;
   display: flex;

@@ -1,3 +1,12 @@
+#channel-container {
+    display: block;
+    overflow: auto;
+    width: 100vw;
+    min-height: 100vh;
+    padding: 0 2rem;
+    padding-bottom: 2rem;
+}
+
 #product-video-container {
     min-width: 60vw;
 }
@@ -14,6 +23,7 @@
 
 #products-container::-webkit-scrollbar {
     height: 0.5rem;
+    width: 0.5rem;
 }
 
 #products-container::-webkit-scrollbar-thumb {
@@ -71,14 +81,20 @@ iframe {
 .comment-item {
     overflow:hidden;
     margin-top: 0.5rem;
+    border-width: 1px;
+    padding: 0.5rem;
 }
 
-#comment-form input {
+#comment-input, #username-input {
     color: #28282F;
     padding: 0.3rem 0.5rem;
     margin-bottom: 0.5rem;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     width: 100%;
+}
+
+#comment-input {
+    resize: none;
 }
 
 #comment-form button {
@@ -91,5 +107,8 @@ iframe {
 @media all and (max-width: 1000px) {
     #wrapper {
         flex-wrap: wrap;
+    }
+    #comments-wrapper {
+        padding-bottom: 2rem;
     }
 }

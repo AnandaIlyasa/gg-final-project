@@ -1,8 +1,17 @@
+#channel-list-container {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    min-height: 100vh;
+    padding: 0 2rem;
+    padding-bottom: 2rem;
+}
+
 li {
     list-style-type: none;
 }
 
-.video-item:hover {
+.channel-item:hover {
     cursor: pointer;
     filter: brightness(50%);
 }
@@ -14,13 +23,13 @@ li {
 }
 
 @media all and (max-width: 1000px) {
-    #video-grid {
+    #channel-grid {
         grid-template-columns: repeat(3, 1fr)
     }
 }
 
 @media all and (max-width: 670px) {
-    #video-grid {
+    #channel-grid {
         grid-template-columns: repeat(2, 1fr)
     }
 }

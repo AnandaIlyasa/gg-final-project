@@ -4,16 +4,17 @@ import Header from "../components/header";
 import { Flex, Heading } from '@chakra-ui/react'
 import "./style.css";
 import Comments from "./components/comments";
-import { useState } from "react";
 import Products from "./components/products";
 import EmbedVideo from "./components/embedVideo";
+import useForm from "../../hooks/useForm";
+import CommentForm from "./components/commentForm";
 
 export default function VideoDetail() {
     const { videoId } = useParams();
     const [products] = useFetch(`${import.meta.env.VITE_API_URL}/products/videos/${videoId}`, { method: "GET" });
     const [currentVideo] = useFetch(`${import.meta.env.VITE_API_URL}/videos/${videoId}`, { method: "GET" });
     const [comments, setComments] = useFetch(`${import.meta.env.VITE_API_URL}/videos/${videoId}/comments`, { method: "GET" });
-    const [form, setForm] = useState({
+    const [formData, setFormData, handleInputChange] = useForm({
         username: "",
         comment: ""
     });
@@ -25,12 +26,12 @@ export default function VideoDetail() {
                 `${import.meta.env.VITE_API_URL}/videos/${videoId}/comments`,
                 {
                     method: "POST",
-                    body: JSON.stringify({...form}),
+                    body: JSON.stringify({...formData}),
                 }
             );
             const response = await res.json();
             if (res.status === 200) {
-                setForm({
+                setFormData({
                     username: "",
                     comment: ""
                 })
@@ -45,14 +46,9 @@ export default function VideoDetail() {
             alert("post comment error: ", error)
         }
     };
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setForm({ ...form, [name]: value });
-    };
     
     return (
-        <div className="container">
+        <div id="channel-container">
             <Header />
             <Flex id="wrapper" flexDirection="row" justifyContent="start" gap={3} height="86vh">
                 <Flex id="product-video-container" flexDirection="column" justifyContent="start" gap={3}>
@@ -60,14 +56,13 @@ export default function VideoDetail() {
                     <Products products={products}/>
                 </Flex>
                 <Flex id="comments-wrapper" flexDirection="column">
-                    <Heading size="lg">Comments</Heading>
+                    <Heading as="h8" size="lg">Comments</Heading>
                     <Comments comments={comments}/>
-                    <form id="comment-form" onSubmit={handleSubmit}>
-                        <input id="username" type="text" onChange={handleInputChange} placeholder="username" name="username" value={form.username} required />
-                        <input id="comment" type="text" onChange={handleInputChange} placeholder="comment" name="comment" value={form.comment} required />
-                        <br />
-                        <button type="submit">Send</button>
-                    </form>
+                    <CommentForm 
+                        formData={formData} 
+                        handleSubmit={handleSubmit} 
+                        handleInputChange={handleInputChange} 
+                    />
                 </Flex>
             </Flex>
         </div>
