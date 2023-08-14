@@ -1,5 +1,5 @@
-import { useState } from "react";
-import useUpdateEffect from "./useUpdateEffect";
+import { useEffect, useState } from "react";
+// import useUpdateEffect from "./useUpdateEffect";
 
 const useFetch = (initialUrl, opt) => {
   const [data, setData] = useState({});
@@ -31,7 +31,7 @@ const useFetch = (initialUrl, opt) => {
     fetchData();
   };
 
-  useUpdateEffect(callback, []);
+  useEffect(callback, [options, url]);
 
   return [data, setData, error, loading];
 };
