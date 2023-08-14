@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.ts",
   "scripts": {
+    "start": "ts-node ./src/app.ts",
     "dev": "nodemon -L ./src/app.ts localhost 3070",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "ENVIRONMENT=$ENVIRONMENT webpack",
