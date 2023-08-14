@@ -2,15 +2,17 @@
 
 1. Clone this repository and go to the `backend` folder
 
-2. Make sure your MongoDB server is running and the string connection is match
+2. Create .env file inside backend folder and add `PORT` field with value `3000` or else
 
-3. Install all dependencies
+3. Make sure your MongoDB server is running and add the database string connection to `DB_CONNECTION_URI` field in .env file
+
+4. Install all dependencies
 
    ```
    npm install
    ```
 
-4. Run the aplication
+5. Run the aplication
 
    ```
    npm run dev
