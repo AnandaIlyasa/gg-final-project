@@ -30,13 +30,13 @@ const main = async (): Promise<void> => {
   const rootRoute = new RootRoute(app);
   rootRoute.registerRoutes();
 
-  const port = process.env.APP_PORT
+  const port = parseInt(process.env.PORT) || 3000;
   if (port === undefined) {
     throw new Error('Port is undefined.')
   }
 
-  app.listen(port, () => {
-    return console.log(`Express is listening at http://localhost:${port}`);
+  app.listen(port, "0.0.0.0", () => {
+    return console.log(`Express is listening ${port}`);
   });
 }
 
