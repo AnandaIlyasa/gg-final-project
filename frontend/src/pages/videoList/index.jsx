@@ -6,6 +6,8 @@ import Header from "../components/header";
 
 export default function VideoList() {
     const [videoList] = useFetch(`${import.meta.env.VITE_API_URL}/videos`, { method: "GET" });
+
+    console.log(`check env: ${import.meta.env.VITE_API_URL}`)
     
     return (
         <div className="container">
