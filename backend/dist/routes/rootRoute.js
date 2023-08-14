@@ -11,9 +11,8 @@ const commentService_1 = __importDefault(require("../services/commentService"));
 const productService_1 = __importDefault(require("../services/productService"));
 const videoService_1 = __importDefault(require("../services/videoService"));
 class RootRoute {
-    constructor(app, router) {
+    constructor(app) {
         this.app = app;
-        this.router = router;
     }
     registerRoutes() {
         const router = (0, express_1.Router)();
@@ -25,7 +24,7 @@ class RootRoute {
         router.get("/videos/:videoId/comments", commentController.getAllCommentsByVideoId);
         router.post("/videos/:videoId/comments", commentController.postNewComment);
         router.get("/products/videos/:videoId", productController.getAllProductsByVideoId);
-        this.app.use('/api', router);
+        this.app.use('/', router);
     }
 }
 exports.default = RootRoute;
