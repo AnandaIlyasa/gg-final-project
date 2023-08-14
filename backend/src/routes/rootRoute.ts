@@ -8,11 +8,9 @@ import VideoService from "../services/videoService";
 
 export default class RootRoute {
     app: Application;
-    router: Router;
 
-    constructor(app: Application, router: Router) {
+    constructor(app: Application) {
         this.app = app;
-        this.router = router;
     }
 
     registerRoutes() {
@@ -27,6 +25,6 @@ export default class RootRoute {
         router.post("/videos/:videoId/comments", commentController.postNewComment);
         router.get("/products/videos/:videoId", productController.getAllProductsByVideoId);
         
-        this.app.use('/api', router);
+        this.app.use('/', router);
     }
 }

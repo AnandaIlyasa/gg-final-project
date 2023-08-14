@@ -27,7 +27,7 @@ const main = async (): Promise<void> => {
     console.log(`database error: ${error}`);
   }
 
-  const rootRoute = new RootRoute(app, Router());
+  const rootRoute = new RootRoute(app);
   rootRoute.registerRoutes();
 
   const port = process.env.APP_PORT
