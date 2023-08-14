@@ -2,7 +2,7 @@
   "name": "midterm",
   "version": "1.0.0",
   "description": "",
-  "main": "app.ts",
+  "main": "./src/app.ts",
   "scripts": {
     "start": "ts-node ./src/app.ts",
     "dev": "nodemon -L ./src/app.ts localhost 3070",
